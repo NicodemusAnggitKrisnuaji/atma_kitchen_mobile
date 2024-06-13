@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:atma_kitchen_mobile/page/login.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: const LoginView(),
+    return ProviderScope(
+      child: MaterialApp(
+        home: LoginView(),
+      ),
     );
   }
 }

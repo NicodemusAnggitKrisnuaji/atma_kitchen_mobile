@@ -1,3 +1,4 @@
+import 'package:atma_kitchen_mobile/page/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:atma_kitchen_mobile/model/user.dart';
 import 'package:atma_kitchen_mobile/page/profile.dart';
@@ -24,7 +25,8 @@ class _LoginViewState extends State<LoginView> {
         body: Form(
           key: formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -43,9 +45,9 @@ class _LoginViewState extends State<LoginView> {
                         Text(
                           "Atma Kitchen",
                           style: TextStyle(
-                            color: Color(0xFFfcc0c0),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30),
+                              color: Color(0xFFfcc0c0),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30),
                         ),
                       ],
                     ),
@@ -77,13 +79,18 @@ class _LoginViewState extends State<LoginView> {
                           });
                         },
                         icon: Icon(
-                          _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                          color: _isPasswordVisible ? Colors.grey : Color(0xFFfcc0c0),
+                          _isPasswordVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: _isPasswordVisible
+                              ? Colors.grey
+                              : Color(0xFFfcc0c0),
                         ),
                       ),
                     ),
                     obscureText: !_isPasswordVisible,
-                    validator: (value) => value == '' ? 'Please Enter Your Password' : null,
+                    validator: (value) =>
+                        value == '' ? 'Please Enter Your Password' : null,
                   ),
                   const SizedBox(height: 30),
                   SizedBox(
@@ -98,7 +105,8 @@ class _LoginViewState extends State<LoginView> {
                         backgroundColor: Color(0xFFfcc0c0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 16.0),
                         child: Text("Login"),
                       ),
                     ),
@@ -114,8 +122,8 @@ class _LoginViewState extends State<LoginView> {
 
   Future<void> _login(String email, String password) async {
     try {
-      print(email);
-      Map<String, dynamic>? loginResponse = await UserClient.login(email, password);
+      Map<String, dynamic>? loginResponse =
+          await UserClient.login(email, password);
 
       if (loginResponse == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -123,7 +131,8 @@ class _LoginViewState extends State<LoginView> {
             content: Text('Login failed: response is null'),
           ),
         );
-      } else if (loginResponse.containsKey('status') && loginResponse['status'] != 200) {
+      } else if (loginResponse.containsKey('status') &&
+          loginResponse['status'] != 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(loginResponse['message'] ?? 'Unknown error'),
@@ -142,7 +151,7 @@ class _LoginViewState extends State<LoginView> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ProfileView(user: userData),
+            builder: (context) => Homepage(),
           ),
         );
       }
@@ -160,10 +169,10 @@ class _LoginViewState extends State<LoginView> {
     await sharedPrefs.setInt('userID', userData.id ?? 0);
     await sharedPrefs.setString('nama', userData.nama ?? '');
     await sharedPrefs.setString('email', userData.email ?? '');
-    await sharedPrefs.setString('password', userData.password ?? '');
     await sharedPrefs.setString('alamat', userData.alamat ?? '');
     await sharedPrefs.setString('tanggal_lahir', userData.tanggal_lahir ?? '');
     await sharedPrefs.setString('nomor_telepon', userData.nomor_telepon ?? '');
     await sharedPrefs.setString('saldo', userData.saldo ?? '');
+    // Hindari menyimpan password dalam plaintext
   }
 }
