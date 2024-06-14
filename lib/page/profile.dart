@@ -107,7 +107,7 @@ class _ProfileViewState extends State<ProfileView> {
                 border: OutlineInputBorder(),
               ),
             ),
-             SizedBox(height: 10.0),
+            SizedBox(height: 10.0),
             TextFormField(
               controller: bankController,
               decoration: InputDecoration(
@@ -160,8 +160,8 @@ class _ProfileViewState extends State<ProfileView> {
       // Pastikan untuk mendapatkan token pengguna dari SharedPreferences atau sumber otentikasi lainnya
       String token = widget.user.remember_token ??
           ''; // Ganti dengan cara mendapatkan token pengguna
-      Map<String, dynamic> response =
-          await HistoryClient.tarikSaldo(widget.user.id!, saldo, rekening, bank);
+      Map<String, dynamic> response = await HistoryClient.tarikSaldo(
+          widget.user.id!, saldo, rekening, bank);
       showDialog(
         context: context,
         builder: (context) {

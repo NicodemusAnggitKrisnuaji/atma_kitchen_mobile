@@ -5,7 +5,8 @@ class UserClient {
   static String url = '10.0.2.2:8000';
   static String endpoint = '/api/login';
 
-  static Future<Map<String, dynamic>> login(String email, String password) async {
+  static Future<Map<String, dynamic>> login(
+      String email, String password) async {
     try {
       var response = await http.post(
         Uri.http(url, endpoint),
@@ -29,7 +30,8 @@ class UserClient {
           return Future.error('Login failed: response body is empty');
         }
       } else {
-        return Future.error('Login failed with status: ${response.statusCode}, body: ${response.body}');
+        return Future.error(
+            'Login failed with status: ${response.statusCode}, body: ${response.body}');
       }
     } catch (e) {
       print(e);
